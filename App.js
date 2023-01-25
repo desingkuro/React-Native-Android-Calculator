@@ -1,7 +1,5 @@
 import { Alert, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import {Mycolors} from "./src/styles/Colores";
 import { Operaciones } from './src/componentes/Operaciones';
-import { Display } from './src/componentes/ResultadoOperaciones';
 
 export default function App() {
  

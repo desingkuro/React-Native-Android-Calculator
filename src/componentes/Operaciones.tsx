@@ -9,7 +9,7 @@ export function Operaciones(){
     const [firstNumber, setFirstNumber]=React.useState("0");
     const [secondNumber, setSecondNumber]=React.useState("");
     const [operation, setOperation]=React.useState("");
-    const [result, setResult]=React.useState<Number|null>(0);
+    const [result, setResult]=React.useState<Number|null>(null);
 
     const primerNumero=(Valor:string)=>{
         if(result===null){
@@ -17,17 +17,36 @@ export function Operaciones(){
                 setFirstNumber(firstNumber+Valor);
             }
         }else{
-            clear();
-            if(firstNumber.length < 8){
-                setFirstNumber(firstNumber+Valor);
+            if(secondNumber!==""){
+                //Alert.alert(secondNumber);
+                if(firstNumber.length < 8){
+                    setFirstNumber(firstNumber+Valor);
+                    setResult(null);
+                } 
+            }else{
+               clear();
+                if(firstNumber.length < 8){
+                    setFirstNumber(firstNumber+Valor);
+                } 
             }
+            
         }
         
     }
     const segundoNumero=(valor:string)=>{
-        setSecondNumber(firstNumber);
-        setOperation(valor);
-        setFirstNumber("");
+        if(firstNumber===""){
+            if(result!==null){
+                setSecondNumber(String(result));
+                setOperation(valor);
+                setFirstNumber("");
+            }
+        }else{
+            setSecondNumber(firstNumber);
+            setOperation(valor);
+            setFirstNumber("");
+        }
+        
+        
     };
     const clear=()=>{
         setFirstNumber("");
@@ -56,11 +75,12 @@ export function Operaciones(){
                 break;
             case "/":
                 clear();
-                setResult(parseInt(secondNumber)/parseInt(firstNumber));
+                setResult((parseInt(secondNumber)/parseInt(firstNumber)));
                 setSecondNumber(secondNumber+operation+firstNumber);
                 break;
             default:
-                clear();
+                setSecondNumber("");
+                setFirstNumber(String(result));
                 setResult(null);
                 break;
         }
@@ -82,7 +102,7 @@ export function Operaciones(){
                     <Text style={Mycolors.primeroText}>{secondNumber}{operation}</Text>
                 </View>
                 <View style={Mycolors.PantallaSegundoNumero}>
-                    <Text style={Mycolors.segundoText}>{DisplayResult()}</Text>
+                    <Text style={DisplayResult().length < 8 ?Mycolors.segundoText : Mycolors.TextPequeño}>{DisplayResult()}</Text>
                 </View>
             </View>
             <View style={Mycolors.row}>
