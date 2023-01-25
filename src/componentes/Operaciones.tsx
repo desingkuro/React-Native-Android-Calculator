@@ -102,7 +102,7 @@ export function Operaciones(){
                     <Text style={Mycolors.primeroText}>{secondNumber}{operation}</Text>
                 </View>
                 <View style={Mycolors.PantallaSegundoNumero}>
-                    <Text style={DisplayResult().length < 8 ?Mycolors.segundoText : Mycolors.TextPequeño}>{DisplayResult()}</Text>
+                    <Text style={ String(DisplayResult()).length < 8 ?Mycolors.segundoText :Mycolors.TextPequeño}>{DisplayResult()}</Text>
                 </View>
             </View>
             <View style={Mycolors.row}>
